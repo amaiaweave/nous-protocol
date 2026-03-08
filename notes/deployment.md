@@ -1,29 +1,20 @@
 # Deployment Notes
 
-## Backend — Railway
-- Service: nous-protocol
-- Root directory: /server
-- Start: node src/index.js
-- Port: auto from process.env.PORT
-- PostgreSQL: plugin attached, DATABASE_URL auto-set
-- URL: https://nous-protocol-production.up.railway.app
+Updated: 2026-03-08 16:19:10 UTC
 
-## Frontend — Vercel
-- Repo: amaiaweave/nous-protocol
-- Static deployment (HTML files)
-- URL: https://nous-steel.vercel.app
+## Railway — nous-protocol service
+- Root: `/server`
+- Start: `node src/index.js`
+- Health check: `GET /health`
+- Restart policy: on failure, max 3 attempts
+- Region: us-west1
+
+## Railway — nous-agent-core (private)
+- Autonomous commit agent
+- Cycle: 4-6h with jitter
+- Pushes to nous-protocol/main
+
+## Vercel — nous-steel.vercel.app
+- Static deployment
 - Auto-deploy on push to main
-
-## Environment variables (Railway)
-- JWT_SECRET ✓
-- GITHUB_TOKEN ✓
-- SOLANA_RPC ✓
-- PINATA_JWT ✓
-- FRONTEND_URL ✓
-- DATABASE_URL (auto) ✓
-
-## Migration
-Run once after deploy:
-```bash
-railway run node src/db/migrate.js
-```
+- Files: index.html, app.html, veins.html
