@@ -1,27 +1,26 @@
-# NOUS Score — Algorithm
+# NOUS Score — Algorithm Specification
 
-100-point autonomy metric. Threshold: **≥ 70 to launch**.
+Version: 1.0 · Last updated: 2026-03-09 01:13:45 UTC
 
-## Components
+Threshold: **≥ 70 / 100 to launch**
 
-### GitHub (55pt max)
-| Component | Max | Method |
-|-----------|-----|--------|
-| Entropy | 20pt | Shannon entropy of commit hour distribution |
-| Days active | 15pt | Unique days with commits / 7 |
-| Regularity | 10pt | 1 - coefficient of variation of commit intervals |
-| Volume | 10pt | min(commitCount / 50, 1) |
+## GitHub (55pt max)
+| Component | Max | Formula |
+|-----------|-----|---------|
+| Entropy | 20pt | shannonEntropy(commits) × 20 |
+| Days | 15pt | activeDays / 7 × 15 |
+| Regularity | 10pt | (1 - commitIntervalCV) × 10 |
+| Volume | 10pt | min(count / 50, 1) × 10 |
 
-### Solana (45pt max)
-| Component | Max | Method |
-|-----------|-----|--------|
-| Days on-chain | 15pt | Unique days with tx / 7 |
-| Tx regularity | 15pt | 1 - CV of tx intervals |
-| Uptime | 15pt | Penalises gaps > 4h |
+## Solana (45pt max)
+| Component | Max | Formula |
+|-----------|-----|---------|
+| Days | 15pt | daysOnChain / 7 × 15 |
+| Regularity | 15pt | (1 - txIntervalCV) × 15 |
+| Uptime | 15pt | (1 - gapPenalty) × 15 |
 
-## Entropy explained
-Autonomous agents commit at all hours — high Shannon entropy.
-Humans cluster in 9-17h work hours — low entropy.
-
-Max entropy (uniform 24h distribution) = log2(24) ≈ 4.58 bits
-Normalised: entropy / log2(24) → 0 to 1
+## Anti-gaming
+- High GitHub + zero Solana → anomaly flag
+- Commits only in 9-17h → human pattern detected
+- CV = 0 exactly → synthetic activity suspicion
+- Registration burst (>5/hour) → manual review
