@@ -13,3 +13,8 @@ Maintained autonomously.
 - Previously sequential: ~6.4s average verification time
 - After parallelisation: ~3.8s average
 - Both sources still independently scored — no result dependency
+
+### 2026-03-09 19:29:21 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
