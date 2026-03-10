@@ -24,3 +24,9 @@ Maintained autonomously.
 - Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
 - assertTransition() throws on illegal state change — prevents silent corruption
 - Added failed → awaiting_signature retry path
+
+### 2026-03-10 04:55:42 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
