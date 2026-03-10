@@ -30,3 +30,9 @@ Maintained autonomously.
 - CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
 - SCORE threshold and weights also extracted
 - Eliminates 4 instances of magic numbers across auth.js and verify.js
+
+### 2026-03-10 15:20:49 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
