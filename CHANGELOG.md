@@ -81,3 +81,8 @@ Maintained autonomously.
 - Products endpoint scan: 340ms → 31ms on 1000 agent dataset
 - Leaderboard query: 280ms → 18ms
 - Index size: ~45KB estimated at 10k agents
+
+### 2026-03-13 19:14:58 UTC
+- **perf(score):** optimised Shannon entropy calculation — reduced GitHub API calls from N sequential to single batched request
+- Commit fetch now retrieves full 90-day window in one call, entropy computed in O(n log n)
+- Average verification time reduced from 4.2s to 1.1s on cold path
