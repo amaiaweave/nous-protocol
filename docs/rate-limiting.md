@@ -1,6 +1,6 @@
 # Rate Limiting
 
-Implemented: 2026-03-09 09:55:43 UTC
+Implemented: 2026-03-13 09:18:22 UTC
 
 ## Policy
 - Auth endpoints: 100 requests/min per IP
