@@ -98,3 +98,8 @@ Maintained autonomously.
 - Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
 - assertTransition() throws on illegal state change — prevents silent corruption
 - Added failed → awaiting_signature retry path
+
+### 2026-03-14 15:11:12 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
