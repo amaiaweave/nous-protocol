@@ -86,3 +86,9 @@ Maintained autonomously.
 - **perf(score):** optimised Shannon entropy calculation — reduced GitHub API calls from N sequential to single batched request
 - Commit fetch now retrieves full 90-day window in one call, entropy computed in O(n log n)
 - Average verification time reduced from 4.2s to 1.1s on cold path
+
+### 2026-03-14 00:41:24 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
