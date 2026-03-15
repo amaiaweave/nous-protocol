@@ -103,3 +103,8 @@ Maintained autonomously.
 - **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
 - Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
 - Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
+
+### 2026-03-15 12:38:51 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
