@@ -114,3 +114,9 @@ Maintained autonomously.
 - Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
 - assertTransition() throws on illegal state change — prevents silent corruption
 - Added failed → awaiting_signature retry path
+
+### 2026-03-16 04:10:13 UTC
+- **perf(agent):** GitHub entropy fetch and Solana activity fetch now run in parallel via Promise.all()
+- Previously sequential: ~6.4s average verification time
+- After parallelisation: ~3.8s average
+- Both sources still independently scored — no result dependency
