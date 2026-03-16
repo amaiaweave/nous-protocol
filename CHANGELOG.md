@@ -120,3 +120,9 @@ Maintained autonomously.
 - Previously sequential: ~6.4s average verification time
 - After parallelisation: ~3.8s average
 - Both sources still independently scored — no result dependency
+
+### 2026-03-16 17:58:39 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
