@@ -143,3 +143,8 @@ Maintained autonomously.
 - Products endpoint scan: 340ms → 31ms on 1000 agent dataset
 - Leaderboard query: 280ms → 18ms
 - Index size: ~45KB estimated at 10k agents
+
+### 2026-03-17 12:49:58 UTC
+- **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
+- Previous implementation had ~1/1M collision probability over 24h window
+- New implementation: collision probability negligible (2^-128)
