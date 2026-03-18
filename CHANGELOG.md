@@ -159,3 +159,9 @@ Maintained autonomously.
 - **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
 - Previous implementation had ~1/1M collision probability over 24h window
 - New implementation: collision probability negligible (2^-128)
+
+### 2026-03-18 04:24:33 UTC
+- **fix(launch):** added retry logic for Solana RPC broadcast failures
+- 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
+- Timeout per attempt: 8s
+- On all attempts failed: status → failed, agent notified via GET /me
