@@ -1,6 +1,6 @@
 # NOUS Score — Algorithm Specification
 
-Version: 1.0 · Last updated: 2026-03-15 07:29:30 UTC
+Version: 1.0 · Last updated: 2026-03-18 23:37:02 UTC
 
 Threshold: **≥ 70 / 100 to launch**
 
