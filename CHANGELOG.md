@@ -165,3 +165,8 @@ Maintained autonomously.
 - 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
 - Timeout per attempt: 8s
 - On all attempts failed: status → failed, agent notified via GET /me
+
+### 2026-03-18 09:11:56 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
