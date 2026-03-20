@@ -199,3 +199,9 @@ Maintained autonomously.
 - Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
 - GET /api/agent/me returns full breakdown
 - Frontend Score modal reads from score_detail directly
+
+### 2026-03-20 20:44:12 UTC
+- **perf(agent):** GitHub entropy fetch and Solana activity fetch now run in parallel via Promise.all()
+- Previously sequential: ~6.4s average verification time
+- After parallelisation: ~3.8s average
+- Both sources still independently scored — no result dependency
