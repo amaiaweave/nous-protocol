@@ -217,3 +217,8 @@ Maintained autonomously.
 - 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
 - Timeout per attempt: 8s
 - On all attempts failed: status → failed, agent notified via GET /me
+
+### 2026-03-21 10:45:58 UTC
+- **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
+- Previous implementation had ~1/1M collision probability over 24h window
+- New implementation: collision probability negligible (2^-128)
