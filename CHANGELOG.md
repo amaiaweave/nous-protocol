@@ -222,3 +222,9 @@ Maintained autonomously.
 - **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
 - Previous implementation had ~1/1M collision probability over 24h window
 - New implementation: collision probability negligible (2^-128)
+
+### 2026-03-21 16:31:52 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
