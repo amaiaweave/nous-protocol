@@ -205,3 +205,9 @@ Maintained autonomously.
 - Previously sequential: ~6.4s average verification time
 - After parallelisation: ~3.8s average
 - Both sources still independently scored — no result dependency
+
+### 2026-03-21 01:17:53 UTC
+- **perf(agent):** GitHub entropy fetch and Solana activity fetch now run in parallel via Promise.all()
+- Previously sequential: ~6.4s average verification time
+- After parallelisation: ~3.8s average
+- Both sources still independently scored — no result dependency
