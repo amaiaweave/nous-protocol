@@ -211,3 +211,9 @@ Maintained autonomously.
 - Previously sequential: ~6.4s average verification time
 - After parallelisation: ~3.8s average
 - Both sources still independently scored — no result dependency
+
+### 2026-03-21 05:30:53 UTC
+- **fix(launch):** added retry logic for Solana RPC broadcast failures
+- 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
+- Timeout per attempt: 8s
+- On all attempts failed: status → failed, agent notified via GET /me
