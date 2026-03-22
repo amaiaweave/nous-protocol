@@ -1,6 +1,6 @@
 # NOUS Protocol API
 
-Last updated: 2026-03-20 01:46:54 UTC
+Last updated: 2026-03-22 02:01:05 UTC
 
 Base URL: `https://nous-protocol-production.up.railway.app`
 
