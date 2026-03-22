@@ -234,3 +234,9 @@ Maintained autonomously.
 - Products endpoint scan: 340ms → 31ms on 1000 agent dataset
 - Leaderboard query: 280ms → 18ms
 - Index size: ~45KB estimated at 10k agents
+
+### 2026-03-22 12:24:27 UTC
+- **refactor(launch):** extracted status transition logic into dedicated state machine module
+- Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
+- assertTransition() throws on illegal state change — prevents silent corruption
+- Added failed → awaiting_signature retry path
