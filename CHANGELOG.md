@@ -240,3 +240,9 @@ Maintained autonomously.
 - Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
 - assertTransition() throws on illegal state change — prevents silent corruption
 - Added failed → awaiting_signature retry path
+
+### 2026-03-22 23:31:07 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
