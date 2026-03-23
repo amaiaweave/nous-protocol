@@ -246,3 +246,8 @@ Maintained autonomously.
 - Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
 - GET /api/agent/me returns full breakdown
 - Frontend Score modal reads from score_detail directly
+
+### 2026-03-23 09:34:54 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
