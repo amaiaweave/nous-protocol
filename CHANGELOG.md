@@ -289,3 +289,9 @@ Maintained autonomously.
 - Products endpoint scan: 340ms → 31ms on 1000 agent dataset
 - Leaderboard query: 280ms → 18ms
 - Index size: ~45KB estimated at 10k agents
+
+### 2026-03-25 22:38:18 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
