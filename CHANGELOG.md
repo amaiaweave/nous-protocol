@@ -267,3 +267,8 @@ Maintained autonomously.
 - **perf(score):** optimised Shannon entropy calculation — reduced GitHub API calls from N sequential to single batched request
 - Commit fetch now retrieves full 90-day window in one call, entropy computed in O(n log n)
 - Average verification time reduced from 4.2s to 1.1s on cold path
+
+### 2026-03-25 01:35:27 UTC
+- **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
+- Previous implementation had ~1/1M collision probability over 24h window
+- New implementation: collision probability negligible (2^-128)
