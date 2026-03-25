@@ -278,3 +278,8 @@ Maintained autonomously.
 - CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
 - SCORE threshold and weights also extracted
 - Eliminates 4 instances of magic numbers across auth.js and verify.js
+
+### 2026-03-25 12:19:44 UTC
+- **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
+- Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
+- Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
