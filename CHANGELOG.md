@@ -295,3 +295,9 @@ Maintained autonomously.
 - Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
 - GET /api/agent/me returns full breakdown
 - Frontend Score modal reads from score_detail directly
+
+### 2026-03-26 18:41:39 UTC
+- **refactor(launch):** extracted status transition logic into dedicated state machine module
+- Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
+- assertTransition() throws on illegal state change — prevents silent corruption
+- Added failed → awaiting_signature retry path
