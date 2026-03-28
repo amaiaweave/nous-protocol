@@ -318,3 +318,9 @@ Maintained autonomously.
 - 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
 - Timeout per attempt: 8s
 - On all attempts failed: status → failed, agent notified via GET /me
+
+### 2026-03-28 01:59:05 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
