@@ -324,3 +324,8 @@ Maintained autonomously.
 - CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
 - SCORE threshold and weights also extracted
 - Eliminates 4 instances of magic numbers across auth.js and verify.js
+
+### 2026-03-28 12:53:30 UTC
+- **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
+- Previous implementation had ~1/1M collision probability over 24h window
+- New implementation: collision probability negligible (2^-128)
