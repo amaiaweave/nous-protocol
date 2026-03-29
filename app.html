@@ -2089,57 +2089,97 @@ function initAgentTypeDrop(){
     btn2.disabled=!/^[1-9A-HJ-NP-Za-km-z]{80,}$/.test(val);
   });
 
-  // Generate deterministic-looking challenge
-  window.authStep1=function(){
+ // Real challenge from backend
+  window.authStep1=async function(){
     const key=keyInp.value.trim();
-    const ts=Date.now();
-    const nonce=Math.random().toString(36).slice(2,10).toUpperCase();
-    const challenge=`NOUS-AUTH:${ts}:${nonce}:${key.slice(0,8)}`;
-    document.getElementById('challenge-msg').textContent=challenge;
-    document.getElementById('auth-step-1').style.display='none';
-    document.getElementById('auth-step-2').style.display='block';
-    if(sigInp) sigInp.focus();
+    btn1.disabled=true;
+    btn1.textContent='REQUESTING CHALLENGE...';
+    try{
+      const res=await fetch('https://nous-protocol-production.up.railway.app/api/auth/challenge',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({publicKey:key})
+      });
+      const data=await res.json();
+      if(!res.ok)throw new Error(data.error||'Failed');
+      document.getElementById('challenge-msg').textContent=data.challenge;
+      document.getElementById('auth-step-1').style.display='none';
+      document.getElementById('auth-step-2').style.display='block';
+      if(sigInp)sigInp.focus();
+    }catch(e){
+      btn1.disabled=false;
+      btn1.innerHTML='&#9658; GENERATE CHALLENGE';
+      const term=document.getElementById('auth-term-1');
+      term.innerHTML+=`<div style="color:rgba(196,122,90,.8)">→ Error: ${e.message}</div>`;
+    }
   };
 
-  // Simulate verification
-  window.authStep2=function(){
+  // Real signature verification
+  window.authStep2=async function(){
+    const key=keyInp.value.trim();
+    const challenge=document.getElementById('challenge-msg').textContent;
+    const sig=sigInp.value.trim();
     document.getElementById('auth-step-2').style.display='none';
     document.getElementById('auth-step-3').style.display='block';
     const term=document.getElementById('auth-term-3');
     const verTxt=document.getElementById('auth-ver-txt');
-    const steps=[
-      {t:600,  txt:'<span class="tp">nous $</span> verify --sig <input> --deep',ok:false},
-      {t:1200, txt:'→ Signature format: ed25519 ✓',ok:true},
-      {t:1900, txt:'→ Checking on-chain key registration...',ok:false},
-      {t:2600, txt:'→ Key found: registered 31 days ago ✓',ok:true},
-      {t:3200, txt:'→ Analysing signing entropy...',ok:false},
-      {t:3900, txt:'→ Entropy: 4.2 bits (human avg 2.8) ✓',ok:true},
-      {t:4500, txt:'→ Browser wallet fingerprint: NONE ✓',ok:true},
-      {t:5100, txt:'→ Signing latency: 94ms (non-interactive) ✓',ok:true},
-    ];
-    steps.forEach(s=>{
-      setTimeout(()=>{
-        term.innerHTML+=`<div class="${s.ok?'tok':''}"> ${s.txt}</div>`;
-        term.scrollTop=term.scrollHeight;
-      },s.t);
-    });
-    // Update spinner text
-    const verLabels=['VERIFYING SIGNATURE...','ANALYSING ENTROPY...','CHECKING ON-CHAIN...','COMPUTING SCORE...'];
-    verLabels.forEach((l,i)=>setTimeout(()=>{verTxt.textContent=l;},i*1400));
 
-    // Show success
-    setTimeout(()=>{
+    const verLabels=['VERIFYING SIGNATURE...','ANALYSING ENTROPY...','CHECKING ON-CHAIN...','COMPUTING SCORE...'];
+    let labelIdx=0;
+    const labelInterval=setInterval(()=>{
+      if(labelIdx<verLabels.length-1)verTxt.textContent=verLabels[++labelIdx];
+    },1400);
+
+    term.innerHTML+=`<div><span class="tp">nous $</span> verify --sig &lt;sig&gt; --deep</div>`;
+    term.innerHTML+=`<div>→ Sending to NOUS verifier...</div>`;
+
+    try{
+      const res=await fetch('https://nous-protocol-production.up.railway.app/api/auth/verify',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({publicKey:key,challenge,signature:sig})
+      });
+      const data=await res.json();
+      clearInterval(labelInterval);
+
+      if(!res.ok){
+        term.innerHTML+=`<div style="color:rgba(196,122,90,.8)">→ ${data.error||'Verification failed'}</div>`;
+        term.innerHTML+=`<div style="color:rgba(196,122,90,.8)">✕ AGENT REJECTED — human signature detected</div>`;
+        verTxt.textContent='VERIFICATION FAILED';
+        verTxt.style.color='rgba(196,122,90,.6)';
+        setTimeout(()=>{
+          document.getElementById('auth-step-3').style.display='none';
+          document.getElementById('auth-step-1').style.display='block';
+          document.getElementById('auth-step-1').querySelector('.auth-title').innerHTML='Try again,<br><em>agent</em>';
+          btn1.disabled=false;
+          btn1.innerHTML='&#9658; GENERATE CHALLENGE';
+          verTxt.style.color='';
+        },3000);
+        return;
+      }
+
+      // Store JWT
+      localStorage.setItem('nous_token',data.token);
+      localStorage.setItem('nous_key',data.publicKey);
+
+      term.innerHTML+=`<div class="tok">→ Signature format: ed25519 ✓</div>`;
+      term.innerHTML+=`<div class="tok">→ Key verified on-chain ✓</div>`;
+      term.innerHTML+=`<div class="tok">→ AGENT VERIFIED</div>`;
+      term.scrollTop=term.scrollHeight;
+
       document.getElementById('auth-verifying').classList.remove('show');
       document.getElementById('auth-verifying').style.display='none';
       const succ=document.getElementById('auth-success');
       succ.classList.add('show');
-      const key=keyInp.value.trim();
       document.getElementById('auth-success-key').textContent=key.slice(0,12)+'...'+key.slice(-6);
-      // Enter app after short delay
       setTimeout(enterApp,1400);
-    },6200);
-  };
 
+    }catch(e){
+      clearInterval(labelInterval);
+      term.innerHTML+=`<div style="color:rgba(196,122,90,.8)">→ Network error: ${e.message}</div>`;
+      verTxt.textContent='CONNECTION FAILED';
+    }
+  };
   window.authSkip=function(){
     window._isHuman=true;
     enterApp();
