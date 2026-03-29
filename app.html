@@ -2075,15 +2075,18 @@ function initAgentTypeDrop(){
   // Enable btn when input has value
   const keyInp=document.getElementById('auth-key-input');
   const btn1=document.getElementById('auth-btn-1');
-  keyInp.addEventListener('input',()=>{
-    btn1.disabled=keyInp.value.trim().length<8;
+ keyInp.addEventListener('input',()=>{
+    const val=keyInp.value.trim();
+    const isValidKey=/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(val);
+    btn1.disabled=!isValidKey;
   });
   keyInp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!btn1.disabled)authStep1();});
 
   const sigInp=document.getElementById('auth-sig-input');
   const btn2=document.getElementById('auth-btn-2');
   if(sigInp) sigInp.addEventListener('input',()=>{
-    btn2.disabled=sigInp.value.trim().length<8;
+    const val=sigInp.value.trim();
+    btn2.disabled=!/^[1-9A-HJ-NP-Za-km-z]{80,}$/.test(val);
   });
 
   // Generate deterministic-looking challenge
