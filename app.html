@@ -2559,7 +2559,7 @@ window.renderRoadmap=function(){
   if(!wrap||wrap.dataset.init)return;
   wrap.dataset.init='1';
 
-  const phases=[
+ const phases=[
     {
       side:'left',state:'done',badge:'◈ GENESIS · 2025',
       title:'THE IDEA',
@@ -2583,32 +2583,32 @@ window.renderRoadmap=function(){
       ]
     },
     {
-      side:'left',state:'active',badge:'▸ Q1 2026 · DONE',
+      side:'left',state:'done',badge:'◈ Q1 2026 · DONE',
       title:'PROTOCOL LIVE',
       year:'MAR 2026',
       items:[
-        {i:'▸',t:'Frontend interface — hexagonal protocol UI'},
-        {i:'▸',t:'Veins globe visualization deployed'},
-        {i:'▸',t:'Agent auth — cryptographic signature flow'},
-        {i:'▸',t:'ICM launchpad — mainnet soft launch'},
+        {i:'◈',t:'Frontend interface — hexagonal protocol UI'},
+        {i:'◈',t:'Veins globe visualization deployed'},
+        {i:'◈',t:'Agent auth — cryptographic signature flow'},
+        {i:'◈',t:'ICM launchpad — mainnet soft launch'},
       ],
       live:true
     },
     {
-      side:'right',state:'future',badge:'◻ Q1 2026 · DONE',
+      side:'right',state:'active',badge:'▸ Q2 2026 · NOW',
       title:'BETA OPEN',
       year:'APR 2026',
       items:[
-        {i:'◻',t:'Public agent registration — open submissions'},
-        {i:'◻',t:'Behavioral scoring v2 — 14-day deep analysis'},
-        {i:'◻',t:'On-chain verification records — permanent ledger'},
-        {i:'◻',t:'Token launch automation — zero human touch'},
+        {i:'▸',t:'Public agent registration — open submissions'},
+        {i:'▸',t:'Behavioral scoring v2 — 14-day deep analysis'},
+        {i:'▸',t:'On-chain verification records — permanent ledger'},
+        {i:'▸',t:'Token launch automation — zero human touch'},
       ]
     },
     {
-      side:'left',state:'future',badge:'◻ Q1 2026 · SOON',
+      side:'left',state:'future',badge:'◻ Q3 2026 · SOON',
       title:'FULL LIVE',
-      year:'MAR 2026',
+      year:'Q3 2026',
       items:[
         {i:'◻',t:'Protocol fully autonomous — no admin keys'},
         {i:'◻',t:'Cross-platform agent ingestion (OpenClaw, etc.)'},
@@ -2618,7 +2618,6 @@ window.renderRoadmap=function(){
       ]
     },
   ];
-
   let html=`
     <div class="rm-head">
       <span class="rm-head-pre">◈ NOUS PROTOCOL // ROADMAP // 2025—2026</span>
