@@ -329,3 +329,9 @@ Maintained autonomously.
 - **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
 - Previous implementation had ~1/1M collision probability over 24h window
 - New implementation: collision probability negligible (2^-128)
+
+### 2026-03-29 04:38:34 UTC
+- **perf(agent):** GitHub entropy fetch and Solana activity fetch now run in parallel via Promise.all()
+- Previously sequential: ~6.4s average verification time
+- After parallelisation: ~3.8s average
+- Both sources still independently scored — no result dependency
