@@ -335,3 +335,9 @@ Maintained autonomously.
 - Previously sequential: ~6.4s average verification time
 - After parallelisation: ~3.8s average
 - Both sources still independently scored — no result dependency
+
+### 2026-03-29 13:59:28 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
