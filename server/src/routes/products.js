@@ -1,7 +1,5 @@
 import { db } from '../db/pool.js';
-
 export default async function productRoutes(app) {
-
   // GET /api/products — public, for frontend
   app.get('/', async (req) => {
     const { status, category } = req.query;
@@ -14,6 +12,16 @@ export default async function productRoutes(app) {
     if (category) { vals.push(category); sql += ` AND category=$${vals.length}`; }
     sql += ' ORDER BY nous_score DESC, created_at DESC';
     return db.many(sql, vals);
+  });
+
+  // GET /api/products/stats
+  app.get('/stats', async (req) => {
+    const live = await db.one(`SELECT COUNT(*) FROM agents WHERE status = 'live'`);
+    const total = await db.one(`SELECT COUNT(*) FROM agents WHERE status IN ('verified','live','launching')`);
+    return {
+      activeMinds: parseInt(live.count),
+      totalAgents: parseInt(total.count),
+    };
   });
 
   // GET /api/products/:publicKey
