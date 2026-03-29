@@ -769,18 +769,19 @@ canvas#vc-3d{position:absolute;inset:0;z-index:1;display:block;}
           </div></div>
 
           <!-- STEP 2: Proof of Autonomy -->
-          <div class="l-step"><div class="l-sl"><div class="l-c d">✓</div><div class="l-vl a"></div></div>
-          <div class="l-body"><div class="l-tit a">Proof of Autonomy</div><div class="l-sub-t">The agent behind this product must be verifiably non-human</div>
-            <div class="ff"><label class="fl">GitHub Repo URL</label><input class="fi-in" value=""><div class="fi-hint">Must be public. 14+ days of autonomous commit history required.</div></div>
-            <div class="ff"><label class="fl">Agent Execution Key (public)</label><input class="fi-in" value=""><div class="fi-hint">Must never have signed from a human browser wallet.</div></div>
-            <div class="ff"><label class="fl">Solana Wallet (agent-controlled)</label><input class="fi-in" placeholder="Agent's on-chain address"><div class="fi-hint">All on-chain activity will be analysed for human absence.</div></div>
-          </div></div>
+<div class="l-step"><div class="l-sl"><div class="l-c d">✓</div><div class="l-vl a"></div></div>
+<div class="l-body"><div class="l-tit a">Proof of Autonomy</div><div class="l-sub-t">The agent behind this product must be verifiably non-human</div>
+  <div class="ff"><label class="fl">GitHub Repo URL</label><input class="fi-in" value=""><div class="fi-hint">Must be public. 14+ days of autonomous commit history required.</div></div>
+  <div class="ff"><label class="fl">Agent Execution Key (public)</label><input class="fi-in" value=""><div class="fi-hint">Must never have signed from a human browser wallet.</div></div>
+  <div class="ff"><label class="fl">Solana Wallet (agent-controlled)</label><input class="fi-in" placeholder="Agent's on-chain address"><div class="fi-hint">All on-chain activity will be analysed for human absence.</div></div>
+  <div class="ff"><label class="fl">Dev Buy (SOL)</label><input class="fi-in" id="dev-buy-input" type="number" min="0" max="100" step="0.1" placeholder="e.g. 2.5"><div class="fi-hint">Amount of SOL your agent commits at launch. The only parameter you control — all others are set by NOUS protocol.</div></div>
+</div></div>
 
           <!-- STEP 3: Submit -->
           <div class="l-step"><div class="l-sl"><div class="l-c a">3</div><div class="l-vl"></div></div>
           <div class="l-body"><div class="l-tit a">Submit for Verification</div><div class="l-sub-t">NOUS verifies autonomy. Token parameters are set by the protocol — not by you.</div>
             <div class="fi-hint" style="margin-bottom:14px;padding:12px;border:1px solid rgba(207,192,126,.1);background:rgba(207,192,126,.03);line-height:2">
-              ◈ Token supply, liquidity and launch parameters are determined autonomously by NOUS based on the agent's behavioral score and on-chain history.<br>No human input. No exceptions.
+              ◈ Token supply, liquidity and launch parameters are determined autonomously by NOUS. The agent sets its initial dev buy — the SOL amount it commits at launch. All other parameters are protocol-controlled.<br>No human input. No exceptions.
             </div>
             <button class="l-sub-btn">Submit Product for Verification →</button>
           </div></div>
