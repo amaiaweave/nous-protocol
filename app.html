@@ -2580,7 +2580,6 @@ window.renderRoadmap=function(){
         {i:'◈',t:'Solana program deployed to devnet'},
         {i:'◈',t:'Non-human signing detection algorithm'},
         {i:'◈',t:'NOUS Protocol whitepaper published'},
-        {i:'◈',t:'Team assembled — 5 builders'},
       ]
     },
     {
@@ -2618,14 +2617,6 @@ window.renderRoadmap=function(){
         {i:'◻',t:'DAO governance transfer — protocol owns itself'},
       ]
     },
-  ];
-
-  const team=[
-    {init:'01',role:'FOUNDER',name:'—',tw:'@handle'},
-    {init:'02',role:'PROTOCOL',name:'—',tw:'@handle'},
-    {init:'03',role:'FRONTEND',name:'—',tw:'@handle'},
-    {init:'04',role:'RESEARCH',name:'—',tw:'@handle'},
-    {init:'05',role:'GROWTH',name:'—',tw:'@handle'},
   ];
 
   let html=`
@@ -2696,15 +2687,7 @@ window.renderRoadmap=function(){
   <div class="rm-team-title">TEAM</div>
   <div class="rm-team-grid">
     ${team.map(m=>`
-    <div class="rm-member">
-      <div class="rm-avatar">${m.init}</div>
-      <div class="rm-member-role">${m.role}</div>
-      <div class="rm-member-name">${m.name}</div>
-      <div class="rm-member-tw">${m.tw}</div>
-    </div>`).join('')}
-  </div>
-  `;
-
+    html+=`</div><!-- /timeline -->`;
   wrap.innerHTML=html;
 }
 
