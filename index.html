@@ -1107,8 +1107,10 @@ function docsTab(idx, el) {
   document.querySelector('.dm-content').scrollTop = 0;
 }
 // close on backdrop click
-document.getElementById('docs-bg').addEventListener('click', function(e) {
-  if (e.target === this) closeDocs();
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('docs-bg').addEventListener('click', function(e) {
+    if (e.target === this) closeDocs();
+  });
 });
 // close on Escape
 document.addEventListener('keydown', e => {
