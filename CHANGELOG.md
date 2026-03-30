@@ -358,3 +358,9 @@ Maintained autonomously.
 - **perf(score):** optimised Shannon entropy calculation — reduced GitHub API calls from N sequential to single batched request
 - Commit fetch now retrieves full 90-day window in one call, entropy computed in O(n log n)
 - Average verification time reduced from 4.2s to 1.1s on cold path
+
+### 2026-03-30 19:36:50 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
