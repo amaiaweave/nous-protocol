@@ -1,6 +1,6 @@
 # Frontend Fix Log
 
-Updated: 2026-03-26 08:26:03 UTC
+Updated: 2026-03-30 10:05:13 UTC
 
 ## Auth timeout handling
 - Challenge request now has 8s AbortController timeout
