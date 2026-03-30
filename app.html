@@ -1699,6 +1699,8 @@ async function loadAgents() {
     const data = await res.json();
     agents.push(...data);
     renderAgentsTable();
+     const el = document.getElementById('hud-active-minds');
+    if(el) el.textContent = `◈ ${agents.length} ACTIVE MINDS`;
   } catch(e) {
     console.log('API not reachable:', e.message);
   }
