@@ -95,4 +95,30 @@ export default async function agentRoutes(app) {
     );
     return { ok: true };
   });
+  // GET /api/agent/:publicKey/info — public info about agent
+  app.get('/:publicKey/info', async (req, reply) => {
+    const { publicKey } = req.params;
+    if (!publicKey) return reply.code(400).send({ error: 'publicKey required' });
+    
+    const result = await db.query(
+      `SELECT public_key, created_at, nous_score, status 
+       FROM agents WHERE public_key = $1`,
+      [publicKey]
+    );
+    
+    if (!result.rows.length) return reply.code(404).send({ error: 'Agent not found' });
+    
+    const agent = result.rows[0];
+    const daysRegistered = Math.floor(
+      (Date.now() - new Date(agent.created_at)) / 86400000
+    );
+    
+    return {
+      publicKey: agent.public_key,
+      daysRegistered,
+      nousScore: agent.nous_score || 0,
+      status: agent.status || 'pending',
+      createdAt: agent.created_at
+    };
+  });
 }
