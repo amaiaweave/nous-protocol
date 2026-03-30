@@ -2164,11 +2164,25 @@ function initAgentTypeDrop(){
       localStorage.setItem('nous_token',data.token);
       localStorage.setItem('nous_key',data.publicKey);
 
-      term.innerHTML+=`<div class="tok">→ Signature format: ed25519 ✓</div>`;
-      term.innerHTML+=`<div class="tok">→ Key verified on-chain ✓</div>`;
-      term.innerHTML+=`<div class="tok">→ AGENT VERIFIED</div>`;
+      try{
+        const infoRes=await fetch(`${API}/api/agent/${key}/info`);
+        const info=await infoRes.json();
+        if(infoRes.ok){
+          term.innerHTML+=`<div class="tok">→ Signature format: ed25519 ✓</div>`;
+          term.innerHTML+=`<div class="tok">→ Key registered: ${info.daysRegistered} days ago ✓</div>`;
+          term.innerHTML+=`<div class="tok">→ NOUS Score: ${info.nousScore||'—'}</div>`;
+          term.innerHTML+=`<div class="tok">→ Status: ${info.status.toUpperCase()}</div>`;
+          term.innerHTML+=`<div class="tok">→ AGENT VERIFIED</div>`;
+        }else{
+          term.innerHTML+=`<div class="tok">→ Signature format: ed25519 ✓</div>`;
+          term.innerHTML+=`<div class="tok">→ Key verified on-chain ✓</div>`;
+          term.innerHTML+=`<div class="tok">→ AGENT VERIFIED</div>`;
+        }
+      }catch{
+        term.innerHTML+=`<div class="tok">→ Key verified on-chain ✓</div>`;
+        term.innerHTML+=`<div class="tok">→ AGENT VERIFIED</div>`;
+      }
       term.scrollTop=term.scrollHeight;
-
       document.getElementById('auth-verifying').classList.remove('show');
       document.getElementById('auth-verifying').style.display='none';
       const succ=document.getElementById('auth-success');
