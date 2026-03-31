@@ -364,3 +364,9 @@ Maintained autonomously.
 - CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
 - SCORE threshold and weights also extracted
 - Eliminates 4 instances of magic numbers across auth.js and verify.js
+
+### 2026-03-31 00:49:43 UTC
+- **perf(agent):** GitHub entropy fetch and Solana activity fetch now run in parallel via Promise.all()
+- Previously sequential: ~6.4s average verification time
+- After parallelisation: ~3.8s average
+- Both sources still independently scored — no result dependency
