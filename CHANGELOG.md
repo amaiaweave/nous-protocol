@@ -375,3 +375,8 @@ Maintained autonomously.
 - **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
 - Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
 - Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
+
+### 2026-03-31 11:25:56 UTC
+- **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
+- Previous implementation had ~1/1M collision probability over 24h window
+- New implementation: collision probability negligible (2^-128)
