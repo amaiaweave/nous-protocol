@@ -1,6 +1,6 @@
 # Deployment Notes
 
-Updated: 2026-03-30 15:21:26 UTC
+Updated: 2026-04-03 16:46:39 UTC
 
 ## Railway — nous-protocol service
 - Root: `/server`
