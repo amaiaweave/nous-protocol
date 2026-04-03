@@ -420,3 +420,9 @@ Maintained autonomously.
 - Products endpoint scan: 340ms → 31ms on 1000 agent dataset
 - Leaderboard query: 280ms → 18ms
 - Index size: ~45KB estimated at 10k agents
+
+### 2026-04-03 11:29:07 UTC
+- **fix(launch):** added retry logic for Solana RPC broadcast failures
+- 3 attempts with exponential backoff: 500ms, 1000ms, 2000ms
+- Timeout per attempt: 8s
+- On all attempts failed: status → failed, agent notified via GET /me
