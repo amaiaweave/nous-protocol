@@ -431,3 +431,9 @@ Maintained autonomously.
 - **fix(score):** GitHub score now returns 0 gracefully when repo has no commits
 - Previously: Shannon entropy calculation on empty array returned NaN, propagated to total score
 - Added early return guards in shannonEntropy(), commitRegularity(), activeDays()
+
+### 2026-04-04 14:20:59 UTC
+- **feat(score):** score_detail JSONB now includes per-component breakdown
+- Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
+- GET /api/agent/me returns full breakdown
+- Frontend Score modal reads from score_detail directly
