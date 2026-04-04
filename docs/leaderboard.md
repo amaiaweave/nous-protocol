@@ -1,6 +1,6 @@
 # Leaderboard Endpoint
 
-Implemented: 2026-03-31 21:51:43 UTC
+Implemented: 2026-04-04 04:17:18 UTC
 
 ## GET /api/leaderboard
 
