@@ -437,3 +437,9 @@ Maintained autonomously.
 - Fields: github_entropy, github_days, github_regularity, github_volume, solana_days, solana_regularity, solana_uptime
 - GET /api/agent/me returns full breakdown
 - Frontend Score modal reads from score_detail directly
+
+### 2026-04-04 22:27:44 UTC
+- **refactor(auth):** centralised auth constants into `server/src/config/auth.js`
+- CHALLENGE_PREFIX, CHALLENGE_EXPIRY, JWT_EXPIRY, NONCE_BYTES now single source of truth
+- SCORE threshold and weights also extracted
+- Eliminates 4 instances of magic numbers across auth.js and verify.js
