@@ -448,3 +448,9 @@ Maintained autonomously.
 - **fix(auth):** replaced Math.random() nonce with crypto.randomBytes(16).toString('hex')
 - Previous implementation had ~1/1M collision probability over 24h window
 - New implementation: collision probability negligible (2^-128)
+
+### 2026-04-05 12:17:09 UTC
+- **refactor(launch):** extracted status transition logic into dedicated state machine module
+- Explicit transition map: pending → verifying → verified → awaiting_signature → submitting → live
+- assertTransition() throws on illegal state change — prevents silent corruption
+- Added failed → awaiting_signature retry path
